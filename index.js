@@ -1,6 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const User = require("./model");
+require("dotenv").config();
+
+
+
 const app = express();
 app.use(express.json())
 const MongoClient = require("mongodb");
@@ -72,10 +76,10 @@ app.post("/", async (req, res) => {
 
 mongoose
   .connect(
-    "mongodb+srv://Jagadeesh:jagadeesh@cluster0.ddgzpxz.mongodb.net/pujita?retryWrites=true&w=majority&appName=Cluster0"
+    process.env.MONGO_URL
   )
   .then(() =>
-    app.listen(3001, () => {
+    app.listen(process.env.PORT, () => {
       console.log("Server listening on 3001 and database connected");
     })
   )
